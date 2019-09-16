@@ -24,7 +24,7 @@ Alternatively, they can also been used locally.
     * COMPSs installation
     * Jupyter (with the desired ipykernel)
     * ipywidgets (only for some hands-on notebooks)
-    * numpy (onl for some notebooks)
+    * numpy (only for some notebooks)
 
 ## Instructions
 
