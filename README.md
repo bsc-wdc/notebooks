@@ -32,7 +32,7 @@ Alternatively, they can also been used locally.
     * Run in your machine:
         - git clone https://github.com/bsc-wdc/notebooks.git
         - docker pull compss/compss-tutorial:2.5
-        - # Update the path to the notebooks path in the next command before running it
+        - \# Update the path to the notebooks path in the next command before running it
         - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
         - docker exec -it mycompss /bin/bash
         
