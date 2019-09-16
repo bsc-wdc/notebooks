@@ -89,7 +89,8 @@ It is necessary to **RESTART the python kernel from Jupyter** after the executio
 
 ## Troubleshooting
 
-* ISSUE 1: Cannot connect using docker pull. The docker service is not running:
+* ISSUE 1: Cannot connect using docker pull.
+  REASON: *The docker service is not running*:
 ```
 # Error messsage:
 Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
@@ -97,7 +98,18 @@ Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docke
 sudo service docker start
 ```
 
-* ISSUE 2: COMPSs does not start in Jupyter.
+* ISSUE 2: The notebooks folder is empty or contains other data using docker. REASON: *The notebooks path in the docker run command is wrong*.
+```
+# Remove the docker instance and reinstantiate with the appropriate notebooks path
+exit
+docker stop mycompss
+docker rm mycompss
+# Pay attention and UPDATE: /PATH/TO in the next command
+docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
+# Continue as normal
+```
+
+* ISSUE 3: COMPSs does not start in Jupyter.
 ```
 # SOLUTION: Restart the python kernel from Jupyter and 
 #           check that there are no compss' python/java processes running. 
