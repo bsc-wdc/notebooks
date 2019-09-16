@@ -1,29 +1,88 @@
 # PyCOMPSs + Jupyter Tutorial Notebooks
 
-This folder contains all PyCOMPSs related tutorial notebooks.
+This repository contains all PyCOMPSs related tutorial notebooks.
 
 It is divided into two main folders:
 
-1. **syntax**: Contains the main tutorial notebooks are.
-They cover the syntax and main functionalities of PyCOMPSs.
+1. **syntax**: Contains the main tutorial notebooks. They cover the syntax and main functionalities of PyCOMPSs.
 2. **hands-on**: Contains some example applications and hands-on exercises
 
 ## Prerequisites
 
-* Python
-* COMPSs installation
-* Jupyter
-* ipywidgets (only for some hands-on notebooks)
+This notebooks can be used with the **Docker** (recommended for Linux and Mac-OS) or **Virtual Machine** (recommended for Windows) provided by BSC.
+Alternatively, they can also been used locally.
 
-## Execution instructions
+* Using **Docker**:
+    * Docker
+    * Git
+
+* Using **Virtual Machine**:
+    * VirtualBox
+
+* For **local** execution:
+    * Python 2 or 3
+    * COMPSs installation
+    * Jupyter (with the desired ipykernel)
+    * ipywidgets (only for some hands-on notebooks)
+    * numpy (onl for some notebooks)
+
+## Instructions
+
+* Using **Docker**:
+    * Run in your machine:
+        ```
+        git clone https://github.com/bsc-wdc/notebooks.git
+        docker pull compss/compss-tutorial:2.5
+        # Update the path to the notebooks path in the next command before running it
+        docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
+        docker exec -it mycompss /bin/bash
+        ```
+    * Now that docker is running and you are connected:
+        ```
+        cd /home/notebooks
+        /etc/init.d/compss-monitor start
+        jupyter-notebook --no-browser --allow-root --ip=172.17.0.2 --NotebookApp.token=
+        ```
+    * From local web browser:
+        * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
+        * Open Jupyter notebook interface: http://localhost:8888/
+        
+* Using **Virtual Machine**:
+    * Download the OVA from: https://www.bsc.es/research-and-development/software-and-apps/software-list/comp-superscalar/downloads  (*Look for Virtual Appliances section*)
+    * Import the OVA from VirtualBox
+    * Start the Virtual Machine
+        * User: **compss**
+        * Password: **compss2019**
+    * Open a console and run:
+        ```
+        git clone https://github.com/bsc-wdc/notebooks.git
+        cd notebooks
+        /etc/init.d/compss-monitor start
+        jupyter-notebook
+        ```
+    * Open the web browser:
+        * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
+        * Open Jupyter notebook interface: http://localhost:8888/
+        
+
+
+## Local Execution instructions
+
+Install all requirements described in **Prerequisites** setion.
 
 Usage:
+
+    git clone https://github.com/bsc-wdc/notebooks.git
+    cd notebooks
+    /etc/init.d/compss-monitor start
     jupyter-notebook
 
 Then:
-    Look for the ```application.ipynb``` to be executed
+   * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
+   * Open Jupyter notebook interface: http://localhost:8888/
+       * Look for the ```application.ipynb``` of interest.
 
 
-## Notes
+## Important Notes
 
-After the execution of any application it is necessary to restart the python kernel from Jupyter.
+It is necessary to **RESTART the python kernel from Jupyter** after the execution of any notebook. 
