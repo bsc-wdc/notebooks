@@ -30,22 +30,17 @@ Alternatively, they can also been used locally.
 
 * Using **Docker**:
     * Run in your machine:
-    
-        ```bash
-        git clone https://github.com/bsc-wdc/notebooks.git
-        docker pull compss/compss-tutorial:2.5
-        # Update the path to the notebooks path in the next command before running it
-        docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
-        docker exec -it mycompss /bin/bash
-        ```
+        - git clone https://github.com/bsc-wdc/notebooks.git
+        - docker pull compss/compss-tutorial:2.5
+        - # Update the path to the notebooks path in the next command before running it
+        - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
+        - docker exec -it mycompss /bin/bash
         
     * Now that docker is running and you are connected:
     
-        ```bash
-        cd /home/notebooks
-        /etc/init.d/compss-monitor start
-        jupyter-notebook --no-browser --allow-root --ip=172.17.0.2 --NotebookApp.token=
-        ```
+        - cd /home/notebooks
+        - /etc/init.d/compss-monitor start
+        - jupyter-notebook --no-browser --allow-root --ip=172.17.0.2 --NotebookApp.token=
         
     * From local web browser:
         * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
@@ -58,13 +53,10 @@ Alternatively, they can also been used locally.
         * User: **compss**
         * Password: **compss2019**
     * Open a console and run:
-    
-        ```bash
-        git clone https://github.com/bsc-wdc/notebooks.git
-        cd notebooks
-        /etc/init.d/compss-monitor start
-        jupyter-notebook
-        ```
+        - git clone https://github.com/bsc-wdc/notebooks.git
+        - cd notebooks
+        - /etc/init.d/compss-monitor start
+        - jupyter-notebook
         
     * Open the web browser:
         * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
@@ -77,13 +69,10 @@ Alternatively, they can also been used locally.
 Install all requirements described in **Prerequisites** setion.
 
 * Usage:
-
-```bash
-    git clone https://github.com/bsc-wdc/notebooks.git
-    cd notebooks
-    /etc/init.d/compss-monitor start
-    jupyter-notebook
-```
+    - git clone https://github.com/bsc-wdc/notebooks.git
+    - cd notebooks
+    - /etc/init.d/compss-monitor start
+    - jupyter-notebook
 
 * Then:
    * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
@@ -99,29 +88,21 @@ It is necessary to **RESTART the python kernel from Jupyter** after the executio
 
 * ISSUE 1: Cannot connect using docker pull.
   REASON: *The docker service is not running*:
-  
-```bash
-# Error messsage:
-Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
-# SOLUTION: Restart the docker service:
-sudo service docker start
-```
+    - \# Error messsage:
+    - Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+    - \# SOLUTION: Restart the docker service:
+    - sudo service docker start
+
 
 * ISSUE 2: The notebooks folder is empty or contains other data using docker. REASON: *The notebooks path in the docker run command is wrong*.
+    - \# Remove the docker instance and reinstantiate with the appropriate notebooks path
+    - exit
+    - docker stop mycompss
+    - docker rm mycompss
+    - \# Pay attention and UPDATE: /PATH/TO in the next command
+    - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
+    - \# Continue as normal
 
-```bash
-# Remove the docker instance and reinstantiate with the appropriate notebooks path
-exit
-docker stop mycompss
-docker rm mycompss
-# Pay attention and UPDATE: /PATH/TO in the next command
-docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
-# Continue as normal
-```
 
 * ISSUE 3: COMPSs does not start in Jupyter.
-
-```bash
-# SOLUTION: Restart the python kernel from Jupyter and 
-#           check that there are no compss' python/java processes running. 
-```
+    - \# SOLUTION: Restart the python kernel from Jupyter and check that there are no compss' python/java processes running. 
