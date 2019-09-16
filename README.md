@@ -46,7 +46,7 @@ Alternatively, they can also been used locally.
     * From local web browser:
         * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
         * Open Jupyter notebook interface: http://localhost:8888/
-        
+
 * Using **Virtual Machine**:
     * Download the OVA from: https://www.bsc.es/research-and-development/software-and-apps/software-list/comp-superscalar/downloads  (*Look for Virtual Appliances section*)
     * Import the OVA from VirtualBox
@@ -63,7 +63,7 @@ Alternatively, they can also been used locally.
     * Open the web browser:
         * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
         * Open Jupyter notebook interface: http://localhost:8888/
-        
+
 
 
 ## Local Execution instructions
@@ -85,4 +85,20 @@ Then:
 
 ## Important Notes
 
-It is necessary to **RESTART the python kernel from Jupyter** after the execution of any notebook. 
+It is necessary to **RESTART the python kernel from Jupyter** after the execution of any notebook.
+
+## Troubleshooting
+
+* ISSUE 1: Cannot connect using docker pull. The docker service is not running:
+```
+# Error messsage:
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+# SOLUTION: Restart the docker service:
+sudo service docker start
+```
+
+* ISSUE 2: COMPSs does not start in Jupyter.
+```
+# SOLUTION: Restart the python kernel from Jupyter and 
+#           check that there are no compss' python/java processes running. 
+```
