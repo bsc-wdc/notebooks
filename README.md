@@ -1,11 +1,23 @@
 # PyCOMPSs + Jupyter Tutorial Notebooks
 
+## Introduction
+
 This repository contains all PyCOMPSs related tutorial notebooks.
 
 It is divided into two main folders:
 
 1. **syntax**: Contains the main tutorial notebooks. They cover the syntax and main functionalities of PyCOMPSs.
 2. **hands-on**: Contains some example applications and hands-on exercises
+
+
+## Contents
+
+- [Prerequisites](#prerequisites)
+- [Instructions](#instructions)
+- [Local Execution instructions](#local-execution-instructions)
+- [Important Notes](#important-notes)
+- [Troubleshooting](#troubleshooting)
+- [Contact](#contact)
 
 ## Prerequisites
 
@@ -37,7 +49,6 @@ Alternatively, they can also been used locally.
         - docker exec -it mycompss /bin/bash
         
     * Now that docker is running and you are connected:
-    
         - cd /home/notebooks
         - /etc/init.d/compss-monitor start
         - jupyter-notebook --no-browser --allow-root --ip=172.17.0.2 --NotebookApp.token=
@@ -84,10 +95,10 @@ Install all requirements described in **Prerequisites** setion.
 
 It is necessary to **RESTART the python kernel from Jupyter** after the execution of any notebook.
 
+
 ## Troubleshooting
 
-* ISSUE 1: Cannot connect using docker pull.
-  REASON: *The docker service is not running*:
+* ISSUE 1: Cannot connect using docker pull. REASON: *The docker service is not running*:
     - \# Error messsage:
     - Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
     - \# SOLUTION: Restart the docker service:
@@ -105,4 +116,16 @@ It is necessary to **RESTART the python kernel from Jupyter** after the executio
 
 
 * ISSUE 3: COMPSs does not start in Jupyter.
-    - \# SOLUTION: Restart the python kernel from Jupyter and check that there are no compss' python/java processes running. 
+    - \# SOLUTION: Restart the python kernel from Jupyter and check that there are no COMPSs' python/java processes running. 
+
+* ISSUE 4: Numba is not working with the VM. REASON: *Numba is not installed in the VM*
+    - \# SOLUTION: Install Numba in the VM
+    - \#           Open a console in the VM and follow the next steps.
+    - \# For Python 2:
+    - sudo python2 -m pip install numba
+    - \# For Python 3:
+    - sudo python3 -m pip install numba
+
+## Contact
+
+[support-compss@bsc.es](mailto:support-compss@bsc.es)
