@@ -39,6 +39,13 @@ USER root
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
+# Add ssh passwordless to localhost
+RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+RUN cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+USER root
+RUN service ssh start
+USER ${NB_USER}
+
 # Export environment variables
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd64
 ENV COMPSS_HOME /opt/COMPSs
