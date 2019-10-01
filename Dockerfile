@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN userdel -r jenkins
 
 # Add user
-ARG NB_USER=compss_user
+ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
