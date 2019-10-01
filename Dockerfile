@@ -43,8 +43,9 @@ USER ${NB_USER}
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 RUN cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
 USER root
-RUN /usr/bin/ssh-keygen -A
-RUN service ssh start
+RUN rm /etc/ssh/ssh*key
+RUN dpkg-reconfigure openssh-server
+# RUN service ssh start
 USER ${NB_USER}
 
 # Export environment variables
