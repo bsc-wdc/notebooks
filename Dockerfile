@@ -1,7 +1,5 @@
 FROM compss/compss:2.5.1
 
-RUN pip install --no-cache-dir notebook==5.*
-
 RUN pip2 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir --upgrade pip
 
