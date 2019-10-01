@@ -43,6 +43,7 @@ USER ${NB_USER}
 RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 RUN cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
 USER root
+RUN /usr/bin/ssh-keygen -A
 RUN service ssh start
 USER ${NB_USER}
 
