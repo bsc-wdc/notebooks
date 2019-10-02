@@ -1,6 +1,6 @@
 # PyCOMPSs + Jupyter Tutorial Notebooks
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bsc-wdc/notebooks/for_binder)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bsc-wdc/notebooks/for_binder?urlpath=/tree/home/jovyan)
 
 ## Introduction
 
