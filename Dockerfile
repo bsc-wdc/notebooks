@@ -1,12 +1,12 @@
 FROM compss/compss:2.5.1
 
-RUN pip2 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir --upgrade pip
-
 RUN apt-get update && \
 # Apt-get packages
     apt-get install -y --no-install-recommends vim && \
     apt-get clean && \
+# Python packages
+    pip2 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir --upgrade pip && \
     pip2 install --no-cache-dir notebook==5.* && \
     pip3 install --no-cache-dir notebook==5.* && \
     pip2 install --no-cache-dir matplotlib && \
@@ -17,10 +17,9 @@ RUN apt-get update && \
     python3 -m ipykernel install --user && \
     python3 -m pip install dislib && \
 # Clean
-    sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+    sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 # Remove jenkins user
-RUN userdel -r jenkins
+    userdel -r jenkins
 
 # Add user
 ARG NB_USER=jovyan
@@ -51,6 +50,6 @@ RUN echo "export JAVA_HOME=\${JAVA_HOME}" >> ${HOME}/.compss_vars && \
     echo "export COMPSS_HOME=\${COMPSS_HOME}" >> ${HOME}/.compss_vars && \
     echo "export PYTHONPATH=\${PYTHONPATH}" >> ${HOME}/.compss_vars && \
     echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}" >> ${HOME}/.compss_vars && \
-    echo "export CLASSPATH=\${CLASSPATH}" >> ${HOME}/.compss_vars
-RUN cat ${HOME}/.bashrc >> ${HOME}/.compss_vars
-RUN mv ${HOME}/.compss_vars ${HOME}/.bashrc
+    echo "export CLASSPATH=\${CLASSPATH}" >> ${HOME}/.compss_vars && \
+    cat ${HOME}/.bashrc >> ${HOME}/.compss_vars && \
+    mv ${HOME}/.compss_vars ${HOME}/.bashrc
