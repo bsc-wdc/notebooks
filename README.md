@@ -45,16 +45,16 @@ Alternatively, they can also been used locally.
 * Using **Docker**:
     * Run in your machine:
         - git clone https://github.com/bsc-wdc/notebooks.git
-        - docker pull compss/compss-tutorial:2.5
+        - docker pull compss/compss:2.6
         - \# Update the path to the notebooks path in the next command before running it
-        - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
+        - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss:2.6
         - docker exec -it mycompss /bin/bash
-        
+
     * Now that docker is running and you are connected:
         - cd /home/notebooks
         - /etc/init.d/compss-monitor start
         - jupyter-notebook --no-browser --allow-root --ip=172.17.0.2 --NotebookApp.token=
-        
+
     * From local web browser:
         * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
         * Open Jupyter notebook interface: http://localhost:8888/
@@ -70,7 +70,7 @@ Alternatively, they can also been used locally.
         - cd notebooks
         - /etc/init.d/compss-monitor start
         - jupyter-notebook
-        
+
     * Open the web browser:
         * Open COMPSs monitor: http://localhost:8080/compss-monitor/index.zul
         * Open Jupyter notebook interface: http://localhost:8888/
@@ -118,15 +118,23 @@ It is necessary to **RESTART the python kernel from Jupyter** after the executio
 
 
 * ISSUE 3: COMPSs does not start in Jupyter.
-    - \# SOLUTION: Restart the python kernel from Jupyter and check that there are no COMPSs' python/java processes running. 
+    - \# SOLUTION: Restart the python kernel from Jupyter and check that there are no COMPSs' python/java processes running.
 
-* ISSUE 4: Numba is not working with the VM. REASON: *Numba is not installed in the VM*
-    - \# SOLUTION: Install Numba in the VM
-    - \#           Open a console in the VM and follow the next steps.
+* ISSUE 4: Numba is not working with the VM or Docker. REASON: *Numba is not installed in the VM or docker*
+    - \# SOLUTION: Install Numba in the VM/Docker
+    - \#           Open a console in the VM/Docker and follow the next steps.
     - \# For Python 2:
     - sudo python2 -m pip install numba
     - \# For Python 3:
     - sudo python3 -m pip install numba
+
+* ISSUE 5: Matplotlib is not working with the VM or Docker. REASON: *Matplotlib is not installed in the VM or docker*
+    - \# SOLUTION: Install Matplotlib in the VM/Docker
+    - \#           Open a console in the VM/Docker and follow the next steps.
+    - \# For Python 2:
+    - sudo python2 -m pip install matplotlib
+    - \# For Python 3:
+    - sudo python3 -m pip install matplotlib
 
 ## Contact
 
