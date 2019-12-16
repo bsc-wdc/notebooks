@@ -6,10 +6,11 @@
 
 This repository contains all PyCOMPSs related tutorial notebooks.
 
-It is divided into two main folders:
+It is divided into three main folders:
 
 1. **syntax**: Contains the main tutorial notebooks. They cover the syntax and main functionalities of PyCOMPSs.
-2. **hands-on**: Contains some example applications and hands-on exercises
+2. **hands-on**: Contains example applications and hands-on exercises.
+3. **demos**: Contains demonstration notebooks.
 
 
 ## Contents
