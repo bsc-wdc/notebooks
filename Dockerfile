@@ -1,4 +1,4 @@
-FROM compss/compss:latest
+FROM compss/compss:2.7
 
 RUN apt-get update && \
 # Apt-get packages
