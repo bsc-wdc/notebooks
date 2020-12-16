@@ -46,9 +46,9 @@ Alternatively, they can also been used locally.
 * Using **Docker**:
     * Run in your machine:
         - git clone https://github.com/bsc-wdc/notebooks.git
-        - docker pull compss/compss:2.6
+        - docker pull compss/compss:2.8
         - \# Update the path to the notebooks path in the next command before running it
-        - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss:2.6
+        - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss:2.8
         - docker exec -it mycompss /bin/bash
 
     * Now that docker is running and you are connected:
@@ -107,16 +107,14 @@ It is necessary to **RESTART the python kernel from Jupyter** after the executio
     - \# SOLUTION: Restart the docker service:
     - sudo service docker start
 
-
 * ISSUE 2: The notebooks folder is empty or contains other data using docker. REASON: *The notebooks path in the docker run command is wrong*.
     - \# Remove the docker instance and reinstantiate with the appropriate notebooks path
     - exit
     - docker stop mycompss
     - docker rm mycompss
     - \# Pay attention and UPDATE: /PATH/TO in the next command
-    - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.5
+    - docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.8
     - \# Continue as normal
-
 
 * ISSUE 3: COMPSs does not start in Jupyter.
     - \# SOLUTION: Restart the python kernel from Jupyter and check that there are no COMPSs' python/java processes running.
@@ -136,6 +134,13 @@ It is necessary to **RESTART the python kernel from Jupyter** after the executio
     - sudo python2 -m pip install matplotlib
     - \# For Python 3:
     - sudo python3 -m pip install matplotlib
+
+* ISSUE 6: Can not install dislib. Raises an exception with dependency package. REASON: *enum34 is present in the docker instance*
+    - \# SOLUTION: Uninstall enum34 from the docker instance
+    - \#           Open a console in the Docker and follow the next steps.
+    - \# For Python 3:
+    - sudo python3 -m pip uninstall -i enum34
+
 
 ## Contact
 

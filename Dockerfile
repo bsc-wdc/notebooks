@@ -1,4 +1,4 @@
-FROM compss/compss:2.6
+FROM compss/compss:2.8
 
 RUN apt-get update && \
 # Apt-get packages
@@ -15,6 +15,7 @@ RUN apt-get update && \
     python2 -m ipykernel install --user && \
     python3 -m pip install ipykernel && \
     python3 -m ipykernel install --user && \
+    python3 -m pip uninstall -y enum34 && \
     python3 -m pip install dislib && \
 # Clean
     sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
