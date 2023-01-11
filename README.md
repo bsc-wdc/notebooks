@@ -15,21 +15,24 @@ It is divided into three main folders:
 
 ## Contents
 
-- [Prerequisites](#prerequisites)
-- [Instructions](#instructions)
-- [Local Execution instructions](#local-execution-instructions)
-- [Important Notes](#important-notes)
-- [Troubleshooting](#troubleshooting)
-- [Contact](#contact)
+- [PyCOMPSs + Jupyter Tutorial Notebooks](#pycompss--jupyter-tutorial-notebooks)
+  - [Introduction](#introduction)
+  - [Contents](#contents)
+  - [Prerequisites](#prerequisites)
+  - [Instructions](#instructions)
+  - [Local Execution instructions](#local-execution-instructions)
+  - [Important Notes](#important-notes)
+  - [Troubleshooting](#troubleshooting)
+  - [Contact](#contact)
 
 ## Prerequisites
 
-This notebooks can be used with the [**pycompss-player**](https://compss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_Player.html) (recommended for Linux and Mac-OS),  **Virtual Machine** provided by BSC (recommended for Windows).
+This notebooks can be used with the [**pycompss-cli**](https://pycompss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_CLI.html) (recommended for Linux and Mac-OS),  **Virtual Machine** provided by BSC (recommended for Windows).
 Alternatively, they can also been used locally.
 
-* Using [**pycompss-player**](https://pypi.org/project/pycompss-player/):
+* Using [**pycompss-cli**](https://pypi.org/project/pycompss-cli/):
     * python3
-    * [pycompss-player](https://compss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_Player.html)
+    * [pycompss-cli](https://pycompss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_CLI.html)
 
 * Using **Docker**:
     * Docker
@@ -40,7 +43,7 @@ Alternatively, they can also been used locally.
 
 * For **local** execution:
     * Git
-    * Python 2 or 3
+    * Python 3
     * [COMPSs installation](https://compss.readthedocs.io/en/stable/Sections/01_Installation.html)
     * Jupyter (with the desired ipykernel)
     * ipywidgets (only for some hands-on notebooks)
@@ -49,84 +52,86 @@ Alternatively, they can also been used locally.
 
 ## Instructions
 
-* Using [**pycompss-player**](https://compss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_Player.html):
+* Using [**pycompss-cli**](https://pycompss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_CLI.html):
     * Install docker:
         * Linux: ```apt-get install docker``` (depends on your distribution)
         * Mac-os: direct download from docker.com. You can find instructions here: https://docs.docker.com/docker-for-mac/install/
     * Get COMPSs docker image:
         ```
-        docker pull compss/compss-tutorial:2.8
+        docker pull compss/compss-tutorial:3.1
         ```
-    * Install *pycompss-player*:
+    * Install *pycompss-cli*:
         * Linux:
             ```
-            sudo python3 -m pip install pycompss-player
+            sudo python3 -m pip install pycompss-cli
             # or
-            python3 -m pip install pycompss-player --user
+            python3 -m pip install pycompss-cli --user
             ```
         * Mac-os:
             ```
-            pip install pycompss-player
+            pip install pycompss-cli
             ```
     * Get *tutorials*:
         ```
         git clone https://github.com/bsc-wdc/tutorial_apps.git
+        git clone https://github.com/bsc-wdc/notebooks.git
         ```
         *Note: If the docker pull command fails be sure you have internet connection, the Docker service is running (sudo service docker start) and your user is in the docker group (sudo usermod -aG docker $USER)*
-    * Use *pycompss-player*:
+    * Use *pycompss-cli*:
         * Initialize a COMPSs cluster:
             ```
-	          pycompss init –i compss/compss-tutorial:2.8
+	        pycompss init -n compss-tutorial docker –i compss/compss-tutorial:3.1
             ```
         * Start Jupyter-notebook:
             ```
             pycompss jupyter
             ```
         * Open a web browser with the address: http://localhost:8888 or http://172.17.0.2:8888
-        * Check the [**pycompss-player documentation**](https://compss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_Player.html) for more information.
-    * Stop *pycompss-player* after playing with PyCOMPSs:
+        * Check the [**pycompss-cli documentation**](https://pycompss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_CLI.html) for more information.
+    * Stop *pycompss-cli* after playing with PyCOMPSs:
          ```
-         pycompss kill
+         pycompss env remove compss-tutorial
          ```
 
 * Using **Virtual Machine** (recommended for Windows):
-    * Download the OVA from: http://compss.bsc.es/releases/vms/COMPSs-2.8.ova
+    * Download the OVA from: http://compss.bsc.es/releases/vms/COMPSs-latest-VM.ova
     * Import the OVA from VirtualBox
     * Start the Virtual Machine
         * User: **compss**
         * Password: **compss2021**
     * Get COMPSs docker image:
         ```
-        docker pull compss/compss-tutorial:2.8
+        docker pull compss/compss-tutorial:3.1
         ```
         *Note: If the docker pull command fails be sure you have internet connection, the Docker service is running (sudo service docker start) and your user is in the docker group (sudo usermod -aG docker $USER)*
     * Get *tutorials*:
         ```
         git clone https://github.com/bsc-wdc/tutorial_apps.git
+        git clone https://github.com/bsc-wdc/notebooks.git
         ```
-    * Use *pycompss-player*:
+    * Use *pycompss-cli*:
         * Initialize a COMPSs cluster:
             ```
-	          pycompss init –i compss/compss-tutorial:2.8
+	        pycompss init -n compss-tutorial docker –i compss/compss-tutorial:3.1
             ```
         * Start Jupyter-notebook:
             ```
             pycompss jupyter
             ```
         * Open a web browser with the address: http://localhost:8888 or http://172.17.0.2:8888
-        * Check the [**pycompss-player documentation**](https://compss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_Player.html) for more information.
-    * Stop *pycompss-player* after playing with PyCOMPSs:
+        * Check the [**pycompss-cli documentation**](https://pycompss.readthedocs.io/en/stable/Sections/08_PyCOMPSs_CLI.html) for more information.
+    * Stop *pycompss-cli* after playing with PyCOMPSs:
          ```
-         pycompss kill
+         pycompss env remove compss-tutorial
          ```
 
 * Using **Docker**:
     * Run in your machine:
         ```
         git clone https://github.com/bsc-wdc/notebooks.git
-        docker pull compss/compss-tutorial:2.8
+        docker pull compss/compss-tutorial:3.1
         # Update the path to the notebooks path in the next command before running it
-        docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:2.8
+        docker run --name mycompss -p 8888:8888 -p 8080:8080 -v /PATH/TO/notebooks:/home/notebooks -itd compss/compss-tutorial:3.1
         docker exec -it mycompss /bin/bash
         ```
     * Now that docker is running and you are connected:
