@@ -1,21 +1,25 @@
-FROM compss/compss:2.8
+FROM compss/compss-tutorial:3.1
 
 RUN apt-get update && \
 # Apt-get packages
     apt-get install -y --no-install-recommends vim && \
     apt-get clean && \
 # Python packages
-    pip2 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir --upgrade pip && \
-    pip2 install --no-cache-dir notebook==5.* && \
     pip3 install --no-cache-dir notebook==5.* && \
-    pip2 install --no-cache-dir matplotlib && \
-    pip3 install --no-cache-dir matplotlib && \
-    python2 -m pip install ipykernel && \
-    python2 -m ipykernel install --user && \
+    pip3 install --no-cache-dir graphviz && \
     python3 -m pip install ipykernel && \
     python3 -m ipykernel install --user && \
-    python3 -m pip uninstall -y enum34 && \
+    # Dislib requirements:
+    python3 -m pip install scikit-learn>=1.0.2 && \
+    python3 -m pip install scipy>=1.3.0 && \
+    python3 -m pip install numpy==1.18.1 && \
+    python3 -m pip install numpydoc>=0.8.0 && \
+    python3 -m pip install cvxpy>=1.1.5 && \
+    python3 -m pip install cbor2>=5.4.0 && \
+    python3 -m pip install pandas>=0.24.2 && \
+    python3 -m pip install matplotlib>=2.2.3 && \
+    # Dislib:
     python3 -m pip install dislib && \
 # Clean
     sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
