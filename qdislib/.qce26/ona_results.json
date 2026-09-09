@@ -1,0 +1,287 @@
+{
+  "source": "MareNostrum Ona (Red QPU) - all 16 wire-cut fragments on hardware",
+  "captured_utc": "2026-09-08T10:33:18+00:00",
+  "qdislib_version": "1.0.0",
+  "circuit": "notebook 01 example_circuit (5 qubits, CZ chain)",
+  "cut_kind": "wire",
+  "cut": [
+    [
+      "CZ_4",
+      "RY_5"
+    ]
+  ],
+  "cut_seed": 0,
+  "observables": "ZZZZZ",
+  "shots": 2000,
+  "qpu": {
+    "name": "MareNostrum Ona",
+    "device": "Red",
+    "job": 12334,
+    "runcard": "/gpfs/apps/QUANTUM/CALIBRATION/qred/qred.yml",
+    "calibration": "2026-09-08 03:22",
+    "physical_qubits": "4 (centre), 5 and 6",
+    "cz_fidelity": {
+      "(4,6)": 0.958,
+      "(4,5)": 0.95
+    },
+    "avoided": "Q0/Q2/Q3 readout stuck high, Q1 pi-pulse at 24% (measured in-run, job 12334)",
+    "why_wire": "wire cuts measure at the end of a fragment, so no fragment needs a mid-circuit measurement the QPU cannot return"
+  },
+  "analytical": 0.44403102996843663,
+  "reconstructed": 0.306779,
+  "reconstructed_all_simulator": 0.4440310299684368,
+  "fragments": [
+    {
+      "index": 0,
+      "nqubits": 3,
+      "observable": "ZZI",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.553,
+      "simulator": 0.6114176588750966,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 1,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": 0.603,
+      "simulator": 0.7262319357693685,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 2,
+      "nqubits": 3,
+      "observable": "ZZI",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.5539999999999999,
+      "simulator": 0.6114176588750966,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 3,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": -0.59,
+      "simulator": -0.7262319357693685,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 4,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.028000000000000035,
+      "simulator": 0.0,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 5,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": -0.34900000000000003,
+      "simulator": -0.49684199865306433,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 6,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.05,
+      "simulator": 0.0,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 7,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": 0.44999999999999996,
+      "simulator": 0.49684199865306433,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 8,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.011000000000000024,
+      "simulator": 0.0,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 9,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": 0.028000000000000032,
+      "simulator": 0.0,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 10,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.08599999999999995,
+      "simulator": 0.0,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 11,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": 0.031000000000000034,
+      "simulator": 0.0,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 12,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.5599999999999999,
+      "simulator": 0.6114176588750966,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 13,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": 0.6130000000000001,
+      "simulator": 0.7262319357693685,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 14,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        5,
+        4,
+        6
+      ],
+      "value": 0.5169999999999999,
+      "simulator": 0.6114176588750966,
+      "hardware_shots": 2000
+    },
+    {
+      "index": 15,
+      "nqubits": 3,
+      "observable": "ZZZ",
+      "device": "ona",
+      "physical_qubits": [
+        4,
+        5,
+        6
+      ],
+      "value": -0.577,
+      "simulator": -0.7262319357693685,
+      "hardware_shots": 2000
+    }
+  ],
+  "distinct_circuits": 10,
+  "duplicate_groups": [
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      3,
+      15
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      8,
+      10
+    ],
+    [
+      12,
+      14
+    ]
+  ],
+  "grouping": "identical circuit text among the 16 wire-cut fragments, computed at capture time; the semantic key collapses at least these"
+}
