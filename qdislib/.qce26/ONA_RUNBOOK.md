@@ -10,30 +10,30 @@ cluster runs it on the QPU and writes `result_<id>.pkl` back. Ids are
 
 ---
 
-## 0. One-time: the shared directory
+## 0. One-time: the shared directory  (DONE, verified 2026-09-09)
 
-Both sides must export the **same** path. The library default
-(`/home/bsc/bsc019635/ona_proves/subcircuits`) will **not** work for attendees —
-the `nct01XXX` training accounts cannot write into your home. Use a project path:
+The spool lives in the listener account's own home, because that is the only
+place both sides can reach without asking ops:
 
-```bash
-export QDISLIB_SUBCIRCUITS_DIR=/gpfs/projects/nct_386/qce26/subcircuits   # confirm the project
-mkdir -p "$QDISLIB_SUBCIRCUITS_DIR"
-chmod 2770 "$QDISLIB_SUBCIRCUITS_DIR"    # setgid: attendee files inherit the group
-```
+    /home/bsc/bsc019635/qce26_spool
 
-Check an attendee account can actually write there **before** the day:
+Why not `/gpfs/scratch/nct_390`: it is mounted on both clusters, but it is owned
+by `root:nct_390` with no world-execute, so `bsc019635` (the only account that can
+submit QPU jobs) cannot traverse into it -- and `nct00013` cannot grant that,
+because it does not own the directory (`setfacl: Operation not permitted`).
 
-```bash
-sudo -u nct01001 touch "$QDISLIB_SUBCIRCUITS_DIR/permcheck" && echo OK
-```
+The grants already applied, from `bsc019635`:
 
-If the training accounts are in a different group, add an ACL:
+    setfacl -m g:nct_390:x  $HOME              # traverse only; they cannot list it
+    mkdir -p $HOME/qce26_spool && chmod g+s $HOME/qce26_spool
+    setfacl -m  g:nct_390:rwx $HOME/qce26_spool
+    setfacl -d -m g:nct_390:rwx $HOME/qce26_spool
+    chmod o-rwx $HOME/qce26_spool
 
-```bash
-setfacl -m g:<training-group>:rwx "$QDISLIB_SUBCIRCUITS_DIR"
-setfacl -d -m g:<training-group>:rwx "$QDISLIB_SUBCIRCUITS_DIR"
-```
+Verified end to end on **both** clusters: students `nct01054` and `nct01120` can
+write `circuit_*.pkl`; `bsc019635` reads them, writes `result_*.pkl` back and
+deletes the circuit -- the listener's exact cycle. Students cannot list the home
+directory itself.
 
 ---
 
@@ -42,7 +42,7 @@ setfacl -d -m g:<training-group>:rwx "$QDISLIB_SUBCIRCUITS_DIR"
 Start the listener on the quantum cluster (Red):
 
 ```bash
-export QDISLIB_SUBCIRCUITS_DIR=/gpfs/projects/nct_386/qce26/subcircuits
+export QDISLIB_SUBCIRCUITS_DIR=/home/bsc/bsc019635/qce26_spool
 export RUNCARD_RED=/path/to/red_runcard.yml
 python examples/qpu_listener.py --qpu red --nshots 1000
 ```

@@ -74,55 +74,20 @@ def _rewrite(qasm, placement):
     return _HEADER + "\n".join(body) + "\n"
 
 
-try:
-    from pycompss.api.api import compss_wait_on
-    from pycompss.api.task import task
-except ImportError:  # no runtime: the fragment is already a real object
+def submit_qasm(qasm, observable, nqubits, timeout=300, poll_interval=1.0):
+    """Run one fragment, given as QASM, on Ona; return ``(expectation, counts)``.
 
-    def compss_wait_on(value):
-        return value
+    Takes plain data rather than a fragment object on purpose. Under PyCOMPSs a
+    fragment is a *future*, and reading one requires a ``@task`` -- but a task
+    defined in this module cannot run: the COMPSs workers import task modules from
+    the application directory, and this file lives in the hidden ``.qce26`` folder,
+    so the worker raises ``ModuleNotFoundError: No module named 'ona_submit'``.
+    The notebook therefore defines that little task itself and passes the result
+    here.
 
-    def task(*args, **kwargs):
-        def decorate(function):
-            return function
-
-        return decorate
-
-
-@task(returns=1)
-def _describe(fragment):
-    """Read a fragment where the object is real, and report QASM loss.
-
-    Under PyCOMPSs ``*_subcircuits`` returns *futures*: the notebook cannot index
-    one or read its attributes. Passing it into a task is the way in, because the
-    runtime resolves task parameters before the body runs. (Waiting on the
-    container is unreliable here, and waiting per element does nothing at all.)
-    Qdislib 1.0.0 wraps the pair in a ``Subcircuit``; 1.0.1 hands it over as-is.
-
-    The measurement check has to happen here too: it compares the circuit with
-    its export, and only this side has the circuit.
-    """
-    pair = fragment.to_circuit() if hasattr(fragment, "to_circuit") else fragment
-    circuit, observable = pair[0], pair[1]
-    qasm = circuit.to_qasm()
-    try:
-        from Qdislib.utils.qasm import qasm_drops_measurements
-
-        dropped = qasm_drops_measurements(circuit, qasm, "qibo")
-    except ImportError:  # Qdislib without the QASM guard
-        dropped = False
-    return qasm, observable, circuit.nqubits, dropped
-
-
-def describe(fragment):
-    """``(qasm, observable, nqubits, dropped)`` for one fragment, future or not."""
-    return compss_wait_on(_describe(fragment))
-
-
-def run(fragment, timeout=300, poll_interval=1.0):
-    """Execute one fragment on Ona and return ``(expectation, counts)``.
-
-    :param fragment: One entry of a ``*_subcircuits`` result (a future is fine).
+    :param qasm: The fragment's OpenQASM 2 text.
+    :param observable: Its Pauli string, e.g. ``"ZZI"``.
+    :param nqubits: The fragment's qubit count.
     :param timeout: Seconds to wait for the listener before giving up.
     :return: The expectation value, and the marginal counts it came from.
     """
@@ -131,14 +96,13 @@ def run(fragment, timeout=300, poll_interval=1.0):
     )
     from Qdislib.utils.qpu_bridge import submit_and_wait
 
-    qasm, observable, nqubits, dropped = describe(fragment)
-    if dropped:
-        # Shipping this would run a different circuit than the one asked for.
+    if "measure" in qasm:
+        # A wire-cut fragment carries no measurement; anything else means the cut
+        # needs a mid-circuit outcome the QPU cannot return.
         raise ValueError(
-            "This fragment measures a qubit and then keeps operating on it. "
-            "OpenQASM 2 cannot express that, and a QPU cannot return the "
-            "mid-circuit outcome anyway. Use a wire cut, whose fragments "
-            "measure only at the end."
+            "This fragment measures a qubit mid-circuit. A QPU returns only "
+            "aggregated final counts, so use a wire cut, whose fragments measure "
+            "only at the end."
         )
 
     placement = _placement(qasm, nqubits)
